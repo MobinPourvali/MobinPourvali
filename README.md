@@ -19,7 +19,7 @@
 
 <h3><code>mowbins@github ~ $ ls ./links</code></h3>
 
-<a href="https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=mobin+pourvali">google scholar</a> &nbsp;&#183;&nbsp;
+<a href="https://scholar.google.com/citations?hl=en&amp;user=VrgHt9UAAAAJ">google scholar</a> &nbsp;&#183;&nbsp;
 <a href="https://www.researchgate.net/profile/Mobin-Pourvali">researchgate</a> &nbsp;&#183;&nbsp;
 <a href="https://www.linkedin.com/in/mobin-pourvali/">linkedin</a> &nbsp;&#183;&nbsp;
 <a href="mailto:mobin.pourvali@studenti.unimi.it">email</a>

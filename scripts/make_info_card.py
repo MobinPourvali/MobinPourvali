@@ -41,6 +41,9 @@ CONTENT: list[tuple[str, str]] = [
     ("blank", ""),
     ("kv", "Stack|R · Python · RNA-seq tooling · bash"),
     ("blank", ""),
+    ("kv", "Highlights|Published researcher in Bioinformatics"),
+    ("bullet", "Check out my Google Scholar for my latest publications"),
+    ("blank", ""),
     ("kv", "Editor|VS Code (RStudio)"),
     ("kv", "Uptime|Coffee-dependent"),
     ("blank", ""),
@@ -63,7 +66,7 @@ PURPLE = "#d2a8ff"
 
 SWATCHES = ["#f85149", "#ffa657", "#e3b341", "#7ee787", "#58a6ff", "#d2a8ff", "#c9d1d9"]
 
-WIDTH = 620
+WIDTH = 660          # wide enough that the longest Highlights bullet clears the padding
 CHROME_H = 34
 PAD_X = 24
 BODY_TOP = CHROME_H + 20

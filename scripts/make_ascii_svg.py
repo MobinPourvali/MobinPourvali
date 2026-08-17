@@ -7,9 +7,15 @@ animate their width 0 -> full (SMIL <animate>, fill="freeze"), staggered top to
 bottom, so the portrait prints itself in one pass and then holds. A small block
 cursor rides each wipe edge and switches off when the row lands.
 
-Every row is emitted at the full column width with xml:space="preserve" and an
-explicit textLength. That is what keeps columns aligned across rows even when a
-renderer falls back to a different monospace font.
+Space characters are dropped and every surviving glyph is pinned with its own
+entry in the row's `x` list. SVG positions each character against its own value,
+so the grid stays exact regardless of which font the renderer picks or how it
+treats whitespace.
+
+Do NOT go back to one string per row with xml:space="preserve" plus
+textLength/lengthAdjust="spacing". Renderers that collapse the whitespace anyway
+(macOS QuickLook is one) then smear the surviving glyphs across the full row
+width, and the portrait dissolves into noise.
 
     python scripts/make_ascii_svg.py            # writes avi-ascii.svg
     STATIC=1 python scripts/make_ascii_svg.py   # frozen frame, for Quick Look
@@ -114,10 +120,13 @@ def build_svg(rows: list[str], static: bool) -> str:
             )
             clip_attr = f' clip-path="url(#{cid})"'
 
-        texts.append(
-            f'<text x="{PAD_X:.1f}" y="{baseline:.1f}" textLength="{text_w:.1f}" '
-            f'lengthAdjust="spacing"{clip_attr}>{esc(row)}</text>'
-        )
+        # One x value per glyph, spaces omitted: exact placement on any renderer.
+        xs = [f"{PAD_X + c * CHAR_W:.1f}" for c, ch in enumerate(row) if ch != " "]
+        glyphs = "".join(ch for ch in row if ch != " ")
+        if glyphs:
+            texts.append(
+                f'<text x="{" ".join(xs)}" y="{baseline:.1f}"{clip_attr}>{esc(glyphs)}</text>'
+            )
 
         if not static and row.strip():
             cw = CHAR_W * 0.85
@@ -144,7 +153,7 @@ def build_svg(rows: list[str], static: bool) -> str:
         parts.append("<defs>" + "".join(defs) + "</defs>")
     parts.append(
         f'<g font-family="{FONT_STACK}" font-size="{FONT_SIZE}" fill="{FG}" '
-        f'xml:space="preserve" shape-rendering="crispEdges">'
+        f'text-rendering="geometricPrecision">'
     )
     parts.extend(texts)
     parts.append("</g>")
