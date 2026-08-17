@@ -20,7 +20,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_OUT = ROOT / "info-card.svg"
 
-USERNAME = "Mowbins"
+# USERNAME is the GitHub account (used for the accessible title); HANDLE is
+# the terminal identity printed on the card header and prompt line.
+USERNAME = "MobinPourvali"
+HANDLE = "Mobin@bioinformatics"
 
 # Stamped at generation time, not at page view: this card is built by hand,
 # so the date reflects the last run of this script.
@@ -35,7 +38,7 @@ GENERATED = date.today().isoformat()
 # The longest line below is 47 chars, so there is real headroom.
 # --------------------------------------------------------------------------- #
 CONTENT: list[tuple[str, str]] = [
-    ("header", f"{USERNAME}@github"),
+    ("header", HANDLE),
     ("rule", ""),
     ("kv", "Now|MSc Molecular Biotechnology & Bioinformatics"),
     ("cont", "University of Milan (UNIMI)"),
@@ -51,7 +54,7 @@ CONTENT: list[tuple[str, str]] = [
     ("kv", "Uptime|Coffee-dependent"),
     ("blank", ""),
     ("swatches", ""),
-    ("prompt", f"{USERNAME}@github ~ $"),
+    ("prompt", f"{HANDLE} ~ $"),
 ]
 
 # --------------------------------------------------------------------------- #

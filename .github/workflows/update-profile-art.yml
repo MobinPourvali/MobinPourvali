@@ -37,7 +37,12 @@ jobs:
       - name: Render heatmap
         run: python scripts/render_heatmap_svg.py
 
+      # Stdlib-only, so it adds no install cost. Refreshes the card's
+      # "Last updated" stamp; the rest of the card is static.
+      - name: Render info card
+        run: python scripts/make_info_card.py
+
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "chore: refresh contribution graph [skip ci]"
-          file_pattern: "data/contributions.json contrib-heatmap.svg"
+          commit_message: "chore: refresh profile art [skip ci]"
+          file_pattern: "data/contributions.json contrib-heatmap.svg info-card.svg"
