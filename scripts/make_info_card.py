@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import argparse
 import os
+from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -21,16 +22,17 @@ DEFAULT_OUT = ROOT / "info-card.svg"
 
 USERNAME = "Mowbins"
 
+# Stamped at generation time, not at page view: this card is built by hand,
+# so the date reflects the last run of this script.
+GENERATED = date.today().isoformat()
+
 # --------------------------------------------------------------------------- #
 # content - the graph already covers your stats, so this is for the story
 # numbers can't tell.
 #
-# Values run from x=132 to x=596: about 57 monospace characters at 13.5px.
+# Values run from x=132 to x=636: about 62 monospace characters at 13.5px.
 # Anything longer needs splitting across ("kv", ...) then ("cont", ...) lines.
-#
-# No Prev / Highlights rows: you left those blank. Add them back as
-#   ("kv", "Prev|..."), and ("kv", "Highlights|..."), ("bullet", "..."),
-# and the layout reflows on its own.
+# The longest line below is 47 chars, so there is real headroom.
 # --------------------------------------------------------------------------- #
 CONTENT: list[tuple[str, str]] = [
     ("header", f"{USERNAME}@github"),
@@ -39,10 +41,11 @@ CONTENT: list[tuple[str, str]] = [
     ("cont", "University of Milan (UNIMI)"),
     ("cont", "Research Intern, Functional Proteomics @ IFOM"),
     ("blank", ""),
-    ("kv", "Stack|R · Python · RNA-seq tooling · bash"),
-    ("blank", ""),
-    ("kv", "Highlights|Published researcher in Bioinformatics"),
-    ("bullet", "Check out my Google Scholar for my latest publications"),
+    ("kv", "Research|Cancer Multi-omics & Biomarker Discovery"),
+    ("kv", "Omics|Transcriptomics (Bulk & scRNA-seq) \u00b7 Proteomics"),
+    ("kv", "Toolkit|R (Bioconductor) \u00b7 Python \u00b7 Snakemake \u00b7 Bash"),
+    ("kv", "Databases|TCGA \u00b7 GEO \u00b7 COSMIC"),
+    ("kv", "Goal|Decoding tumor mechanisms via integrative omics"),
     ("blank", ""),
     ("kv", "Editor|VS Code (RStudio)"),
     ("kv", "Uptime|Coffee-dependent"),
@@ -66,7 +69,7 @@ PURPLE = "#d2a8ff"
 
 SWATCHES = ["#f85149", "#ffa657", "#e3b341", "#7ee787", "#58a6ff", "#d2a8ff", "#c9d1d9"]
 
-WIDTH = 660          # wide enough that the longest Highlights bullet clears the padding
+WIDTH = 660          # keeps the longest value (47 chars) well clear of the padding
 CHROME_H = 34
 PAD_X = 24
 BODY_TOP = CHROME_H + 20
@@ -136,6 +139,11 @@ def build_svg(content: list[tuple[str, str]], static: bool) -> str:
             blink = "" if (static or not BLINK) else ' class="cur"'
             inner.append(
                 f'<rect{blink} x="{cur_x:.1f}" y="{y - 11}" width="8" height="14" fill="{FG}"/>'
+            )
+            # Right-aligned on the same line so the card gains no extra height.
+            inner.append(
+                f'<text x="{WIDTH - PAD_X}" y="{y}" text-anchor="end" fill="{DIM}" '
+                f'font-size="11">Last updated: {GENERATED}</text>'
             )
 
         if inner:
