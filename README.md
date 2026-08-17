@@ -1,5 +1,11 @@
 <div align="center">
 
+<a href="https://github.com/MobinPourvali">
+  <img src="https://readme-typing-svg.demolab.com/?font=Fira+Code&amp;weight=600&amp;size=20&amp;duration=2600&amp;pause=1000&amp;color=39FF14&amp;background=0D1117&amp;center=true&amp;vCenter=true&amp;width=600&amp;height=70&amp;repeat=true&amp;lines=%3E%20Loading%20RNA-seq%20pipeline...;%3E%20Fetching%20TCGA%20datasets...;%3E%20Running%20Snakemake%20workflow...;%3E%20Hello%2C%20I%27m%20Mobin%20Pourvali%21" alt="Loading RNA-seq pipeline... Fetching TCGA datasets... Running Snakemake workflow... Hello, I&apos;m Mobin Pourvali!" width="600" />
+</a>
+
+<br>
+
 <h3><code>Mobin@bioinformatics ~ $ whoami</code></h3>
 
 <table>
