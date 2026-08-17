@@ -1,0 +1,13 @@
+# --- daily automation (the workflow installs only these two, pinned) ---
+requests==2.32.3
+beautifulsoup4==4.12.3
+
+# --- portrait pipeline: local-only, run when your photo changes ---
+# Floors rather than exact pins: the blog's pins (numpy 1.26.4, pillow 10.4.0,
+# opencv-python 4.10.0.84) have no cp313 wheels and fail to build on Python 3.13.
+pillow>=11.0.0
+numpy>=2.1.0
+opencv-python>=4.11.0
+# The [cpu] extra is required: since 2.0.8x, plain `rembg` installs without an
+# inference backend and every call fails with "No onnxruntime backend found."
+rembg[cpu]>=2.0.57
