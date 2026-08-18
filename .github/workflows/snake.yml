@@ -1,8 +1,12 @@
 name: Generate Hacker Snake
-on:
+"on":
   schedule:
     - cron: "0 0 * * *"
   workflow_dispatch:
+  # Also on push, so the output branch gets created without waiting for
+  # the nightly cron - the README embed is broken until it exists.
+  push:
+    branches: [main]
 
 # Added: ghaction-github-pages force-pushes the `output` branch with
 # GITHUB_TOKEN, which is read-only by default on repos created after Feb 2023.

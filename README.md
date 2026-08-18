@@ -38,6 +38,12 @@
 
 <br><br>
 
+<h3><code>Mobin@bioinformatics ~ $ ./track_github_activity.sh</code></h3>
+
+<img src="https://raw.githubusercontent.com/MobinPourvali/MobinPourvali/output/github-snake-dark.svg" width="860" alt="Snake animation traversing the GitHub contribution graph" />
+
+<br><br>
+
 <sub><code>the heatmap refreshes daily via GitHub Actions &#183; everything here is a generated SVG</code></sub>
 
 </div>
