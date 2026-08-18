@@ -1,0 +1,39 @@
+name: Update volcano plot
+
+"on":
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths:
+      - "scripts/make_volcano_plot.py"
+      - "data/de_results.csv"
+
+permissions:
+  contents: write
+
+jobs:
+  volcano:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # No install step: make_volcano_plot.py is standard library only.
+      - name: Render volcano
+        run: |
+          if [ -f data/de_results.csv ]; then
+            python scripts/make_volcano_plot.py \
+              --csv data/de_results.csv \
+              --subtitle "treated vs control"
+          else
+            echo "::warning::data/de_results.csv not found - rendering SIMULATED demo data"
+            python scripts/make_volcano_plot.py --demo
+          fi
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: refresh volcano plot [skip ci]"
+          file_pattern: "volcano.svg"
