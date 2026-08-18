@@ -1,4 +1,4 @@
-name: Update volcano plot
+name: Update omics panels
 
 "on":
   workflow_dispatch: {}
@@ -6,13 +6,14 @@ name: Update volcano plot
     branches: [main]
     paths:
       - "scripts/make_volcano_plot.py"
+      - "scripts/make_msms_spectrum.py"
       - "data/de_results.csv"
 
 permissions:
   contents: write
 
 jobs:
-  volcano:
+  panels:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -33,7 +34,11 @@ jobs:
             python scripts/make_volcano_plot.py --demo
           fi
 
+      # Deterministic from the peptide sequence - no data file needed.
+      - name: Render MS/MS spectrum
+        run: python scripts/make_msms_spectrum.py
+
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "chore: refresh volcano plot [skip ci]"
-          file_pattern: "volcano.svg"
+          commit_message: "chore: refresh omics panels [skip ci]"
+          file_pattern: "volcano.svg msms.svg"
