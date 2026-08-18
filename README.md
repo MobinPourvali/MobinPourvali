@@ -47,3 +47,6 @@
 <sub><code>the heatmap refreshes daily via GitHub Actions &#183; everything here is a generated SVG</code></sub>
 
 </div>
+<h3><code>Mobin@bioinformatics ~ $ ./run_alignment.sh --query human_p53 --subject mouse_p53</code></h3>
+<img src="./alignment.svg" width="860" alt="Terminal Sequence Alignment" />
+<br><br>
