@@ -42,8 +42,8 @@ PROTON = 1.007276
 WATER = 18.010565
 CAM = 57.02146          # carbamidomethyl on Cys, the usual fixed modification
 
-W, H = 900, 440
-M_L, M_R, M_T, M_B = 72, 26, 132, 58
+W, H = 900, 490
+M_L, M_R, M_T, M_B = 86, 30, 165, 66
 PLOT_W = W - M_L - M_R
 PLOT_H = H - M_T - M_B
 
@@ -131,7 +131,8 @@ def noise_peaks(n: int, lo: float, hi: float, seed: int) -> list[dict]:
 # render
 # --------------------------------------------------------------------------- #
 def build_svg(seq: str, ions: list[dict], noise: list[dict], mh: float,
-              mh2: float, cam_cys: bool, label_top: int, static: bool) -> str:
+              mh2: float, cam_cys: bool, label_top: int, static: bool,
+              cycle: float) -> str:
     lo, hi = 80.0, mh + 70
     everything = sorted(ions + noise, key=lambda d: d["mz"])
 
@@ -149,13 +150,13 @@ def build_svg(seq: str, ions: list[dict], noise: list[dict], mh: float,
         x = sx(v)
         grid.append(f'<line x1="{x:.1f}" y1="{M_T}" x2="{x:.1f}" y2="{M_T + PLOT_H}" stroke="{GRID}"/>')
         grid.append(f'<text x="{x:.1f}" y="{M_T + PLOT_H + 19}" text-anchor="middle" '
-                    f'fill="{DIM}" font-size="11">{v}</text>')
+                    f'fill="{DIM}" font-size="14">{v}</text>')
         v += step
     for frac in (0.25, 0.5, 0.75, 1.0):
         y = sy(frac)
         grid.append(f'<line x1="{M_L}" y1="{y:.1f}" x2="{M_L + PLOT_W}" y2="{y:.1f}" stroke="{GRID}"/>')
         grid.append(f'<text x="{M_L - 9}" y="{y + 4:.1f}" text-anchor="end" fill="{DIM}" '
-                    f'font-size="10.5">{int(frac * 100)}</text>')
+                    f'font-size="13">{int(frac * 100)}</text>')
     grid.append(f'<line x1="{M_L}" y1="{M_T + PLOT_H}" x2="{M_L + PLOT_W}" y2="{M_T + PLOT_H}" '
                 f'stroke="{AXIS}"/>')
 
@@ -170,7 +171,7 @@ def build_svg(seq: str, ions: list[dict], noise: list[dict], mh: float,
         tip = (f'{pk["series"]}{pk["idx"]}  m/z {pk["mz"]:.4f}'
                if pk["series"] != "noise" else f'm/z {pk["mz"]:.2f}')
         peaks.append(
-            f'<rect{wcls} x="{x - 1.1:.1f}" y="{y:.1f}" width="2.2" '
+            f'<rect{wcls} x="{x - 1.3:.1f}" y="{y:.1f}" width="2.6" '
             f'height="{M_T + PLOT_H - y:.1f}" fill="{color}">'
             f'<title>{esc(tip)}</title></rect>'
         )
@@ -182,38 +183,38 @@ def build_svg(seq: str, ions: list[dict], noise: list[dict], mh: float,
         color = B_ION if pk["series"] == "b" else Y_ION
         labels.append(
             f'<text class="lb" x="{x:.1f}" y="{y - 6:.1f}" text-anchor="middle" '
-            f'fill="{color}" font-size="10">{pk["series"]}{pk["idx"]}</text>'
+            f'fill="{color}" font-size="14">{pk["series"]}{pk["idx"]}</text>'
         )
 
     # --- annotated sequence ladder ------------------------------------------
     ladder = []
     n = len(seq)
-    cw = 26
+    cw = 27
     seq_w = n * cw
     x0 = M_L + (PLOT_W - seq_w) / 2
-    base_y = 84
+    base_y = 100
     for i, aa in enumerate(seq):
         cx = x0 + i * cw + cw / 2
         ladder.append(f'<text class="sq s{i}" x="{cx:.1f}" y="{base_y}" text-anchor="middle" '
-                      f'fill="{FG}" font-size="17" font-weight="700">{aa}</text>')
+                      f'fill="{FG}" font-size="21" font-weight="700">{aa}</text>')
         if i < n - 1:                                   # b tick: down-right
             bx = x0 + (i + 1) * cw
             ladder.append(f'<path class="sq s{i}" d="M{bx:.1f},{base_y - 16} v-9 h-7" '
                           f'stroke="{B_ION}" stroke-width="1.4" fill="none"/>')
             ladder.append(f'<text class="sq s{i}" x="{bx - 9:.1f}" y="{base_y - 28}" '
-                          f'text-anchor="end" fill="{B_ION}" font-size="8.5">b{i + 1}</text>')
+                          f'text-anchor="end" fill="{B_ION}" font-size="11">b{i + 1}</text>')
             yx = x0 + (i + 1) * cw
             ladder.append(f'<path class="sq s{i}" d="M{yx:.1f},{base_y + 6} v9 h7" '
                           f'stroke="{Y_ION}" stroke-width="1.4" fill="none"/>')
             ladder.append(f'<text class="sq s{i}" x="{yx + 9:.1f}" y="{base_y + 23}" '
-                          f'fill="{Y_ION}" font-size="8.5">y{n - 1 - i}</text>')
+                          f'fill="{Y_ION}" font-size="11">y{n - 1 - i}</text>')
 
     # --- chrome -------------------------------------------------------------
     mod = " · Cys+CAM" if (cam_cys and "C" in seq) else ""
     head = [
-        f'<text x="{M_L}" y="26" fill="{FG}" font-size="13" font-weight="700">'
+        f'<text x="{M_L}" y="30" fill="{FG}" font-size="17" font-weight="700">'
         f'msms.py &#8212; MS/MS fragmentation</text>',
-        f'<text x="{M_L}" y="42" fill="{DIM}" font-size="11">'
+        f'<text x="{M_L}" y="50" fill="{DIM}" font-size="14">'
         f'{esc(seq)} &#183; [M+H]&#8314; {mh:.4f} &#183; [M+2H]&#178;&#8314; {mh2:.4f}{esc(mod)}</text>',
     ]
     legend = []
@@ -221,32 +222,40 @@ def build_svg(seq: str, ions: list[dict], noise: list[dict], mh: float,
     for text, color in ((f"y ions", Y_ION), (f"b ions", B_ION)):
         wpx = len(text) * 6.4 + 20
         lx -= wpx
-        legend.append(f'<rect x="{lx + 2:.1f}" y="17" width="8" height="8" fill="{color}"/>')
-        legend.append(f'<text x="{lx + 15:.1f}" y="25" fill="{DIM}" font-size="11">{text}</text>')
+        legend.append(f'<rect x="{lx + 2:.1f}" y="19" width="10" height="10" fill="{color}"/>')
+        legend.append(f'<text x="{lx + 15:.1f}" y="29" fill="{DIM}" font-size="14">{text}</text>')
 
     foot = [
         f'<text x="{M_L + PLOT_W / 2:.0f}" y="{H - 16}" text-anchor="middle" fill="{DIM}" '
-        f'font-size="11.5">m/z</text>',
+        f'font-size="14">m/z</text>',
         f'<text transform="translate(19,{M_T + PLOT_H / 2:.0f}) rotate(-90)" text-anchor="middle" '
-        f'fill="{DIM}" font-size="11.5">rel. intensity (%)</text>',
-        f'<text x="{W - M_R}" y="{H - 16}" text-anchor="end" fill="{DIM}" font-size="10">'
+        f'fill="{DIM}" font-size="14">rel. intensity (%)</text>',
+        f'<text x="{W - M_R}" y="{H - 16}" text-anchor="end" fill="{DIM}" font-size="12.5">'
         f'exact monoisotopic m/z &#183; simulated intensities</text>',
     ]
 
     if static:
         style = ""
     else:
-        waves = "".join(f".w{i}{{animation-delay:{1.15 + i * 0.05:.3f}s}}" for i in range(26))
+        # Every peak shares one cycle length, so the stagger between them holds
+        # forever; the sweep-out cascades in the same order as the sweep-in.
+        waves = "".join(f".w{i}{{animation-delay:{i * 0.048:.3f}s}}" for i in range(26))
         seqs = "".join(f".s{i}{{animation-delay:{0.25 + i * 0.07:.3f}s}}" for i in range(len(seq)))
         style = (
             "<style><![CDATA["
             "rect{transform-box:fill-box;transform-origin:bottom}"
             ".fr{opacity:0;animation:fade .5s ease-out forwards}"
             ".sq{opacity:0;animation:fade .4s ease-out forwards}"
-            ".pk{opacity:0;animation:rise .42s cubic-bezier(.22,.61,.36,1) forwards}"
-            ".lb{opacity:0;animation:fade .5s ease-out forwards;animation-delay:2.75s}"
+            f".pk{{opacity:0;animation:scan {cycle}s ease-in-out infinite}}"
+            f".lb{{opacity:0;animation:lbl {cycle}s ease-in-out infinite}}"
             "@keyframes fade{to{opacity:1}}"
-            "@keyframes rise{from{opacity:0;transform:scaleY(0)}to{opacity:1;transform:scaleY(1)}}"
+            "@keyframes scan{"
+            "0%{opacity:0;transform:scaleY(0)}"
+            "7%{opacity:1;transform:scaleY(1)}"
+            "58%{opacity:1;transform:scaleY(1)}"
+            "68%{opacity:0;transform:scaleY(0)}"
+            "100%{opacity:0;transform:scaleY(0)}}"
+            "@keyframes lbl{0%,26%{opacity:0}32%,54%{opacity:1}61%,100%{opacity:0}}"
             + waves + seqs +
             "@media (prefers-reduced-motion: reduce){"
             ".fr,.sq,.pk,.lb{opacity:1;animation:none}}"
@@ -285,6 +294,8 @@ def main() -> int:
     ap.add_argument("--noise", type=int, default=45, help="unassigned background peaks")
     ap.add_argument("--labels", type=int, default=10)
     ap.add_argument("--seed", type=int, default=5)
+    ap.add_argument("--cycle", type=float, default=7.0,
+                help="seconds per scan cycle; the animation loops forever")
     ap.add_argument("--static", action="store_true")
     args = ap.parse_args()
 
@@ -298,11 +309,12 @@ def main() -> int:
     noise = noise_peaks(args.noise, 80.0, mh + 60, args.seed)
 
     static = args.static or os.environ.get("STATIC") == "1"
-    svg = build_svg(seq, ions, noise, mh, mh2, cam, args.labels, static)
+    svg = build_svg(seq, ions, noise, mh, mh2, cam, args.labels, static, args.cycle)
     args.out.write_text(svg, encoding="utf-8")
 
     print(f"-> wrote {args.out}  ({seq}, {len(ions)} b/y ions, "
-          f"[M+2H]2+ = {mh2:.4f}, {len(svg) / 1024:.1f} KB{', static' if static else ''})")
+          f"[M+2H]2+ = {mh2:.4f}, {len(svg) / 1024:.1f} KB"
+          f"{', static' if static else f', looping every {args.cycle}s'})")
     return 0
 
 

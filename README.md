@@ -15,6 +15,12 @@
   </tr>
 </table>
 
+<br><br>
+
+<h3><code>Mobin@bioinformatics ~ $ ./run_mass_spec.sh --peptide LVNELTEFAK --continuous-scan</code></h3>
+
+<img src="./msms.svg" width="500" alt="Animated MS/MS fragmentation spectrum of the BSA tryptic peptide LVNELTEFAK, showing b and y ion series" />
+
 <br>
 
 <h3><code>Mobin@bioinformatics ~ $ ls ./links</code></h3>

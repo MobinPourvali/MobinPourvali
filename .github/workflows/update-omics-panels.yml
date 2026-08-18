@@ -1,0 +1,29 @@
+name: Update omics panels
+
+"on":
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths:
+      - "scripts/make_msms_spectrum.py"
+
+permissions:
+  contents: write
+
+jobs:
+  panels:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Render MS/MS spectrum
+        run: python scripts/make_msms_spectrum.py
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: refresh omics panels [skip ci]"
+          file_pattern: "msms.svg"
