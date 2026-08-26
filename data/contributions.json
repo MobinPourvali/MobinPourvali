@@ -1,31 +1,31 @@
 {
   "username": "MobinPourvali",
-  "generated_at": "2026-08-25T07:12:19+00:00",
+  "generated_at": "2026-08-26T07:12:16+00:00",
   "source": "https://github.com/users/MobinPourvali/contributions",
   "range": {
     "from": "2025-08-24",
-    "to": "2026-08-25"
+    "to": "2026-08-26"
   },
   "stats": {
-    "total": 36,
-    "days_tracked": 367,
-    "active_days": 9,
+    "total": 37,
+    "days_tracked": 368,
+    "active_days": 10,
     "max_level": 4,
     "best_day": {
       "date": "2026-08-18",
       "count": 21
     },
     "avg_per_day": 0.1,
-    "avg_per_active_day": 4.0,
+    "avg_per_active_day": 3.7,
     "current_streak": {
-      "length": 8,
+      "length": 9,
       "start": "2026-08-17",
-      "end": "2026-08-24"
+      "end": "2026-08-25"
     },
     "longest_streak": {
-      "length": 8,
+      "length": 9,
       "start": "2026-08-17",
-      "end": "2026-08-24"
+      "end": "2026-08-25"
     },
     "monthly": {
       "2025-08": 0,
@@ -40,11 +40,11 @@
       "2026-05": 0,
       "2026-06": 0,
       "2026-07": 0,
-      "2026-08": 35
+      "2026-08": 36
     },
     "weekday": {
       "Mon": 7,
-      "Tue": 21,
+      "Tue": 22,
       "Wed": 1,
       "Thu": 3,
       "Fri": 2,
@@ -1885,6 +1885,11 @@
     },
     {
       "date": "2026-08-25",
+      "count": 1,
+      "level": 2
+    },
+    {
+      "date": "2026-08-26",
       "count": 0,
       "level": 0
     }
