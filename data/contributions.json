@@ -1,31 +1,31 @@
 {
   "username": "MobinPourvali",
-  "generated_at": "2026-10-24T11:13:20+00:00",
+  "generated_at": "2026-10-25T11:42:55+00:00",
   "source": "https://github.com/users/MobinPourvali/contributions",
   "range": {
-    "from": "2025-10-19",
-    "to": "2026-10-24"
+    "from": "2025-10-26",
+    "to": "2026-10-25"
   },
   "stats": {
-    "total": 96,
-    "days_tracked": 371,
-    "active_days": 69,
+    "total": 97,
+    "days_tracked": 365,
+    "active_days": 70,
     "max_level": 4,
     "best_day": {
       "date": "2026-08-18",
       "count": 21
     },
-    "avg_per_day": 0.26,
+    "avg_per_day": 0.27,
     "avg_per_active_day": 1.39,
     "current_streak": {
-      "length": 68,
+      "length": 69,
       "start": "2026-08-17",
-      "end": "2026-10-23"
+      "end": "2026-10-24"
     },
     "longest_streak": {
-      "length": 68,
+      "length": 69,
       "start": "2026-08-17",
-      "end": "2026-10-23"
+      "end": "2026-10-24"
     },
     "monthly": {
       "2025-10": 0,
@@ -40,7 +40,7 @@
       "2026-07": 0,
       "2026-08": 42,
       "2026-09": 30,
-      "2026-10": 23
+      "2026-10": 24
     },
     "weekday": {
       "Mon": 15,
@@ -48,46 +48,11 @@
       "Wed": 10,
       "Thu": 12,
       "Fri": 11,
-      "Sat": 9,
+      "Sat": 10,
       "Sun": 9
     }
   },
   "days": [
-    {
-      "date": "2025-10-19",
-      "count": 0,
-      "level": 0
-    },
-    {
-      "date": "2025-10-20",
-      "count": 0,
-      "level": 0
-    },
-    {
-      "date": "2025-10-21",
-      "count": 0,
-      "level": 0
-    },
-    {
-      "date": "2025-10-22",
-      "count": 0,
-      "level": 0
-    },
-    {
-      "date": "2025-10-23",
-      "count": 0,
-      "level": 0
-    },
-    {
-      "date": "2025-10-24",
-      "count": 0,
-      "level": 0
-    },
-    {
-      "date": "2025-10-25",
-      "count": 0,
-      "level": 0
-    },
     {
       "date": "2025-10-26",
       "count": 0,
@@ -1905,6 +1870,11 @@
     },
     {
       "date": "2026-10-24",
+      "count": 1,
+      "level": 2
+    },
+    {
+      "date": "2026-10-25",
       "count": 0,
       "level": 0
     }
