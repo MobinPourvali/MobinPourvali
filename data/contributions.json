@@ -1,31 +1,31 @@
 {
   "username": "MobinPourvali",
-  "generated_at": "2026-11-21T14:45:26+00:00",
+  "generated_at": "2026-11-22T14:41:33+00:00",
   "source": "https://github.com/users/MobinPourvali/contributions",
   "range": {
-    "from": "2025-11-16",
-    "to": "2026-11-21"
+    "from": "2025-11-23",
+    "to": "2026-11-22"
   },
   "stats": {
-    "total": 124,
-    "days_tracked": 371,
-    "active_days": 97,
+    "total": 125,
+    "days_tracked": 365,
+    "active_days": 98,
     "max_level": 4,
     "best_day": {
       "date": "2026-08-18",
       "count": 21
     },
-    "avg_per_day": 0.33,
+    "avg_per_day": 0.34,
     "avg_per_active_day": 1.28,
     "current_streak": {
-      "length": 96,
+      "length": 97,
       "start": "2026-08-17",
-      "end": "2026-11-20"
+      "end": "2026-11-21"
     },
     "longest_streak": {
-      "length": 96,
+      "length": 97,
       "start": "2026-08-17",
-      "end": "2026-11-20"
+      "end": "2026-11-21"
     },
     "monthly": {
       "2025-11": 0,
@@ -40,7 +40,7 @@
       "2026-08": 42,
       "2026-09": 30,
       "2026-10": 31,
-      "2026-11": 20
+      "2026-11": 21
     },
     "weekday": {
       "Mon": 19,
@@ -48,46 +48,11 @@
       "Wed": 14,
       "Thu": 16,
       "Fri": 15,
-      "Sat": 13,
+      "Sat": 14,
       "Sun": 13
     }
   },
   "days": [
-    {
-      "date": "2025-11-16",
-      "count": 0,
-      "level": 0
-    },
-    {
-      "date": "2025-11-17",
-      "count": 0,
-      "level": 0
-    },
-    {
-      "date": "2025-11-18",
-      "count": 0,
-      "level": 0
-    },
-    {
-      "date": "2025-11-19",
-      "count": 0,
-      "level": 0
-    },
-    {
-      "date": "2025-11-20",
-      "count": 0,
-      "level": 0
-    },
-    {
-      "date": "2025-11-21",
-      "count": 0,
-      "level": 0
-    },
-    {
-      "date": "2025-11-22",
-      "count": 0,
-      "level": 0
-    },
     {
       "date": "2025-11-23",
       "count": 0,
@@ -1905,6 +1870,11 @@
     },
     {
       "date": "2026-11-21",
+      "count": 1,
+      "level": 2
+    },
+    {
+      "date": "2026-11-22",
       "count": 0,
       "level": 0
     }
